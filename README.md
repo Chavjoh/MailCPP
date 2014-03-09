@@ -3,6 +3,8 @@
 
 C++ implementation of a SMTP client (in French), under Apache 2.0 Licence.
 
+Realized during the first year at [high school Arc](http://www.he-arc.ch) (Switzerland).
+
 Compatibilité
 -------------
 Ce programme est écrit en C++ et est compatible avec les distributions Linux. Malheureusement celui-ci est incompatible avec le système Windows qui utilisent un autre système de socket.
