@@ -1,48 +1,50 @@
-MailCPP
+ï»¿MailCPP
 =======
 
 C++ implementation of a SMTP client (in French), under Apache 2.0 Licence.
 
-Compatibilité
+CompatibilitÃ©
 -------------
-Ce programme est écrit en C++ et est compatible avec les distributions Linux. Malheureusement celui-ci est incompatible avec le système Windows qui utilisent un autre système de socket.
+Ce programme est Ã©crit en C++ et est compatible avec les distributions Linux. Malheureusement celui-ci est incompatible avec le systÃ¨me Windows qui utilisent un autre systÃ¨me de socket.
 
-Il est cependant possible de l’exécuter sur l’environnement Windows via, par exemple, Cygwin, qui permet la simulation de l’environnement Linux.
-Pour fonctionner correctement avec les caractères spéciaux, il est recommandé d’utiliser une invite de commande (terminal) utilisant le jeu de caractère (charset) UTF-8.
+Il est cependant possible de lâ€™exÃ©cuter sur lâ€™environnement Windows via, par exemple, Cygwin, qui permet la simulation de lâ€™environnement Linux.
+Pour fonctionner correctement avec les caractÃ¨res spÃ©ciaux, il est recommandÃ© dâ€™utiliser une invite de commande (terminal) utilisant le jeu de caractÃ¨re (charset) UTF-8.
 
-Cygwin est téléchargeable à l’adresse : http://www.cygwin.com/
+Cygwin est tÃ©lÃ©chargeable Ã  lâ€™adresse : http://www.cygwin.com/
 
 Code source et compilation
 --------------------------
-Le code source de l’application est présent dans « smtp.cpp » (encodage UTF-8) et peut-être compilé, par exemple, à l’aide de g++ via la commande suivante : 
+Le code source de lâ€™application est prÃ©sent dans Â« smtp.cpp Â» (encodage UTF-8) et peut-Ãªtre compilÃ©, par exemple, Ã  lâ€™aide de g++ via la commande suivante :
+``` 
 g++ ./smtp.cpp -o ./smtp
-
-Ce qui créera le programme « smtp » dans le répertoire courant.
+```
+Ce qui crÃ©era le programme Â« smtp Â» dans le rÃ©pertoire courant.
 
 Utilisation
 -----------
-Le programme se nomme « smtp » et s’utilise de la manière suivante :
+Le programme se nomme Â« smtp Â» et sâ€™utilise de la maniÃ¨re suivante :
+```
 ./smtp   serveur
-
-Le paramètre à indiquer lors d’un appel à ce programme est :
-* serveur : Adresse IP ou nom d'hôte du serveur SMTP.
+```
+Le paramÃ¨tre Ã  indiquer lors dâ€™un appel Ã  ce programme est :
+* **serveur :** Adresse IP ou nom d'hÃ´te du serveur SMTP.
 
 Fichier de log
 --------------
-Pour ce programme, un fichier de log « smtp.log » est utilisé, celui-ci contient toutes les communications effectuées entre le serveur et le présent programme d’envoi d’email. 
+Pour ce programme, un fichier de log Â« smtp.log Â» est utilisÃ©, celui-ci contient toutes les communications effectuÃ©es entre le serveur et le prÃ©sent programme dâ€™envoi dâ€™email. 
 
 Fonctionnement
 --------------
-Si vous appelez le programme sans le paramètre obligatoire, celui-ci affichera un texte d’indication pour vous permettre de le lancer correctement, en décrivant la fonction du programme et les paramètres à passer à celui-ci pour son fonctionnement.
+Si vous appelez le programme sans le paramÃ¨tre obligatoire, celui-ci affichera un texte dâ€™indication pour vous permettre de le lancer correctement, en dÃ©crivant la fonction du programme et les paramÃ¨tres Ã  passer Ã  celui-ci pour son fonctionnement.
  
-Une fois le paramètre correctement entré, le programme va fonctionner de la manière suivante : Tout d’abord, celui-ci va créer un fichier log ou l’écraser si celui-ci existe déjà.
+Une fois le paramÃ¨tre correctement entrÃ©, le programme va fonctionner de la maniÃ¨re suivante : Tout dâ€™abord, celui-ci va crÃ©er un fichier log ou lâ€™Ã©craser si celui-ci existe dÃ©jÃ .
 
-Ensuite, le programme va créer un socket et le connecter au port 25 (SMTP) du serveur distant indiqué en paramètre. Si la connexion réussie, celui-ci va initialiser la conversation avec le serveur (commande « HELO »), puis va récupérer auprès de l’utilisateur l’expéditeur et le destinataire de l’email et les transmettre au serveur (respectivement avec les commandes « MAIL FROM : » et « RCPT TO : »). Si un de ceux-ci est refusé, le programme boucle pour demander à nouveau à l’utilisateur l’expéditeur ou le destinataire et le retransmet.
+Ensuite, le programme va crÃ©er un socket et le connecter au port 25 (SMTP) du serveur distant indiquÃ© en paramÃ¨tre. Si la connexion rÃ©ussie, celui-ci va initialiser la conversation avec le serveur (commande Â« HELO Â»), puis va rÃ©cupÃ©rer auprÃ¨s de lâ€™utilisateur lâ€™expÃ©diteur et le destinataire de lâ€™email et les transmettre au serveur (respectivement avec les commandes Â« MAIL FROM : Â» et Â« RCPT TO : Â»). Si un de ceux-ci est refusÃ©, le programme boucle pour demander Ã  nouveau Ã  lâ€™utilisateur lâ€™expÃ©diteur ou le destinataire et le retransmet.
 
-Si le serveur répond à la transmission du destinataire avec un code d’erreur 4xx, c’est-à-dire qu’il s’agit d’un greylisting (rejet temporaire), le programme bouclera toutes les minutes pour tenter à nouveau de transmettre le destinataire. Ce message de rejet temporaire ne peut apparaître que comme réponse lors de l’envoi du destinataire du message, puisque le greylisting est basé sur triplet identifié par l’adresse IP de l’émetteur, l’adresse mail de l’expéditeur et l’adresse mail du destinataire, triplet qu’il ne possède qu’en recevant ce dernier.
+Si le serveur rÃ©pond Ã  la transmission du destinataire avec un code dâ€™erreur 4xx, câ€™est-Ã -dire quâ€™il sâ€™agit dâ€™un greylisting (rejet temporaire), le programme bouclera toutes les minutes pour tenter Ã  nouveau de transmettre le destinataire. Ce message de rejet temporaire ne peut apparaÃ®tre que comme rÃ©ponse lors de lâ€™envoi du destinataire du message, puisque le greylisting est basÃ© sur triplet identifiÃ© par lâ€™adresse IP de lâ€™Ã©metteur, lâ€™adresse mail de lâ€™expÃ©diteur et lâ€™adresse mail du destinataire, triplet quâ€™il ne possÃ¨de quâ€™en recevant ce dernier.
 
-Si aucune erreur ne s’est manifestée, le programme va engager la partie des données (via la commande « DATA »), demander à l’utilisateur le sujet de l’email et le transmettre au serveur accompagnée des informations complémentaires tel que l’expéditeur et le destinataire (ceci pour que les clients emails puissent interpréter ceux-ci).
+Si aucune erreur ne sâ€™est manifestÃ©e, le programme va engager la partie des donnÃ©es (via la commande Â« DATA Â»), demander Ã  lâ€™utilisateur le sujet de lâ€™email et le transmettre au serveur accompagnÃ©e des informations complÃ©mentaires tel que lâ€™expÃ©diteur et le destinataire (ceci pour que les clients emails puissent interprÃ©ter ceux-ci).
 
-Finalement, l’utilisateur est invité à indiquer le contenu de son message, qui peut comprendre plusieurs lignes. Celui-ci prend fin une fois que l’utilisateur entre une ligne ne contenant qu’un seul point. Dès lors le programme détecte cette fin et transmet le point accompagnée de la commande de fermeture de la conversation avec le serveur (commande « QUIT »).
+Finalement, lâ€™utilisateur est invitÃ© Ã  indiquer le contenu de son message, qui peut comprendre plusieurs lignes. Celui-ci prend fin une fois que lâ€™utilisateur entre une ligne ne contenant quâ€™un seul point. DÃ¨s lors le programme dÃ©tecte cette fin et transmet le point accompagnÃ©e de la commande de fermeture de la conversation avec le serveur (commande Â« QUIT Â»).
 
-Pour chacune des étapes précédemment citées, le programme vérifiera la réussite de chaque commande via le code envoyé en réponse par le serveur (un code de type 5xx indiquant une erreur) et stoppera le script en cas d’erreur (à l’exception des erreurs d’adresse expéditeur ou destinataire). 
+Pour chacune des Ã©tapes prÃ©cÃ©demment citÃ©es, le programme vÃ©rifiera la rÃ©ussite de chaque commande via le code envoyÃ© en rÃ©ponse par le serveur (un code de type 5xx indiquant une erreur) et stoppera le script en cas dâ€™erreur (Ã  lâ€™exception des erreurs dâ€™adresse expÃ©diteur ou destinataire). 
