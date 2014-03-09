@@ -70,15 +70,15 @@ char* substring(char* chaine, size_t debut, size_t longueur)
  */
 void viderBuffer()
 {
-    int c = 0;
+	int c = 0;
 	
 	// Boucle pour récupérer la fin de la chaine 
 	// Jusqu'au caractère de retour à la ligne ou fin de ligne
-    while (c != '\n' && c != EOF)
-    {
+	while (c != '\n' && c != EOF)
+	{
 		// Lecture caractère par caractère du buffer
-        c = getchar();
-    }
+		c = getchar();
+	}
 }
 
 /**
@@ -87,37 +87,37 @@ void viderBuffer()
  */
 int lireClavier(char *chaine, int longueur, bool supprimerRetour = true)
 {
-    char *positionEntree = NULL;
+	char *positionEntree = NULL;
 	
 	// Lecture du texte saisi au clavier s'il n'y a pas d'erreur
-    if (fgets(chaine, longueur, stdin) != NULL)
-    {
+	if (fgets(chaine, longueur, stdin) != NULL)
+	{
 		// Recherche le caractère de retour à la ligne
-        positionEntree = strchr(chaine, '\n');
+		positionEntree = strchr(chaine, '\n');
 		
 		// Si le caractère existe
-        if (positionEntree != NULL && supprimerRetour == true)
-        {
+		if (positionEntree != NULL && supprimerRetour == true)
+		{
 			// Remplace le caractère par \0
-            *positionEntree = '\0';
-        }
-        else
-        {
+			*positionEntree = '\0';
+		}
+		else
+		{
 			// Vide le buffer
-            viderBuffer();
-        }
+			viderBuffer();
+		}
 		
 		// Indique que la chaine a été récupérée
-        return 1;
-    }
-    else
-    {
+		return 1;
+	}
+	else
+	{
 		// Vide le buffer
-        viderBuffer();
+		viderBuffer();
 		
 		// Indique qu'aucune chaine n'a été récupérée
-        return 0;
-    }
+		return 0;
+	}
 }
 
 /**
@@ -197,7 +197,7 @@ int main(int argc, char* argv[])
 		cout << "  =========" << endl;
 		cout << "  Permet d'envoyer un mail simple en utilisant le serveur SMTP choisi." << endl << endl;
 		cout << "  Syntaxe :  ./smtp   " << COULEUR_BLEU << "serveur" << endl;
-		cout << "    - serveur " << NORMAL << ": Adresse IP ou nom d'hôte du serveur SMTP" << endl << endl;
+		cout << "	- serveur " << NORMAL << ": Adresse IP ou nom d'hôte du serveur SMTP" << endl << endl;
 		cout << "  Par Johan Chavaillaz" << endl;
 		
 		// Fermeture du programme
